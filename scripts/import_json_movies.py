@@ -15,21 +15,21 @@ with open('movie_json.txt') as data_file:
 # print data
 for movie in data:
     try:
-    new_movie, created = Movie.objects.get_or_create(movie_id=movie['movie_id'])
-    print new_movie.movie_id
-    if movie['title'] != None:
-        new_movie.title = str(unidecode(movie['title']))
-        print new_movie.title
-    new_movie.imdb_id = movie['imdb_id']
-    new_movie.release_date = movie['release_date']
-    new_movie.rating = movie['rating']
-    new_movie.artwork = movie['artwork']
-    if movie['overview'] != None:
-        new_movie.overview = str(unidecode(movie['overview']))
-    new_movie.trailer = movie['trailer']
-    new_movie.upvote_count = movie['upvote_count']
-    new_movie.downvote_count = movie['downvote_count']
-    new_movie.save()
+        new_movie, created = Movie.objects.get_or_create(movie_id=movie['movie_id'])
+        print new_movie.movie_id
+        if movie['title'] != None:
+            new_movie.title = str(unidecode(movie['title']))
+            print new_movie.title
+        new_movie.imdb_id = movie['imdb_id']
+        new_movie.release_date = movie['release_date']
+        new_movie.rating = movie['rating']
+        new_movie.artwork = movie['artwork']
+        if movie['overview'] != None:
+            new_movie.overview = str(unidecode(movie['overview']))
+        new_movie.trailer = movie['trailer']
+        new_movie.upvote_count = movie['upvote_count']
+        new_movie.downvote_count = movie['downvote_count']
+        new_movie.save()
     except:
         print 'Nonetype'
     print '<<' + str(new_movie.pk) +'>>'
