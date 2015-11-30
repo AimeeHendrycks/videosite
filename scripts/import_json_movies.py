@@ -28,4 +28,4 @@ for movie in data:
     new_movie.upvote_count = movie['upvote_count']
     new_movie.downvote_count = movie['downvote_count']
     new_movie.save()
-    print '<<' + new_movie.pk +'>>'
+    print '<<' + str(new_movie.pk) +'>>'
