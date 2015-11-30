@@ -14,15 +14,15 @@ with open('movie_json.txt') as data_file:
 
 # print data
 for movie in data:
-    new_movie, created = Movie.objects.get_or_create(movie_id=str(unidecode(movie['movie_id'])))
+    new_movie, created = Movie.objects.get_or_create(movie_id=movie['movie_id'])
     print new_movie.movie_id
-    new_movie.title = movie['title']
+    new_movie.title = str(unidecode(movie['title']))
     print new_movie.title
     new_movie.imdb_id = movie['imdb_id']
     new_movie.release_date = movie['release_date']
     new_movie.rating = movie['rating']
     new_movie.artwork = movie['artwork']
-    new_movie.overview = movie['overview']
+    new_movie.overview = str(unidecode(movie['overview']))
     new_movie.trailer = movie['trailer']
     new_movie.upvote_count = movie['upvote_count']
     new_movie.downvote_count = movie['downvote_count']
