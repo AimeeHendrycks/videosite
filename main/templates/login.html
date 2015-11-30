@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+
+<div style='text-align:center'>
+<!--If there are issues logging in-->
+                {%if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+                {%endif%}
+                <p style='color:red'>{{valid}}
+                {{form.errors}}</p>
+
+
+                {% if request.user.is_anonymous %}
+                    <!--Regular login form-->
+                    <form method='POST' action="/login/">
+                    {%csrf_token%}
+                        {{form.as_p}}
+
+                        <input type='submit' value='login' />
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+
+                {% else %}
+                    
+                    <!--does not display form-->
+                    
+                    <div style='text-align:center'>
+                        <h2>Logged in as {{request.user}}</h2></br>
+                        <a href='/profile/{{request.user.pk}}'>Profile</a>
+                        <a href="/logout/">Logout</a>
+                    </div>
+
+                {% endif %}
+</div>
+{%endblock body%}

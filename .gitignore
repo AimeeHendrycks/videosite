@@ -1,0 +1,7 @@
+*.pyc
+
+media/
+
+migrations/
+
+.DS_Store

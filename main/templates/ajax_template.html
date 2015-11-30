@@ -1,0 +1,65 @@
+{# 
+<!DOCTYPE html>  
+<html>  
+<head>  
+        <title>Genre List</title>
+
+</head>  
+    <body>
+
+    <input id='test-input' type='text'></input>
+
+    <p id='output'></p>
+
+    </br>
+
+    <p id='clickme-js'>Click Me JS</p>
+    <p id='clickme-jq'>Click Me JQ</p>
+    <ul id='list'>
+        <li class="list-element">Item 1</li>
+        <li class="list-element">Item 2</li>
+        <li class="list-element">Item 3</li>
+        <li class="list-element">Item 4</li>
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+    <script type = 'text/javascript'>
+    
+    $('#test-input').on('keyup', function() {
+        $('#output').text('')
+        $.ajax({
+            type: 'GET',
+            url:'/json_response/',
+
+            data: { search: $('#test-input').val()},
+            error: function() {
+                //what to do if there is an error
+            },
+            success:function(data){
+                console.log(data[0])
+                for (i=0; i < data.length; i++) {
+                    $('#output').append("<div style='width:400px; height:250px; margin-left:20px; margin-top:20px'><h5><img style='width:100px; height:100px' src='" + data[i]['track_image_file'] +  "'>" + data[i]['track_title'] + "</h5></div>")
+                }
+            }
+        });
+    });
+
+    //js
+        document.getElementById('clickme-js').addEventListener('click', function() {
+            ul = document.getElementById('list');
+            li = document.createElement('li');
+            li.appendChild(document.createTextNode('JS Element'));
+            ul.appendChild(li);
+
+        });
+
+    //jquery
+        $('#clickme-jq').on('click', function() {
+            $('#list').append('<li>JQ Element</li>')
+        });
+
+    </script>
+
+    </body>
+</html>  
+ #}

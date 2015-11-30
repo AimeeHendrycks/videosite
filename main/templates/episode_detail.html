@@ -1,0 +1,165 @@
+{%extends 'base.html'%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+
+<div class='col-xs-12 col-sm-10 col-sm-offset-1'>
+
+    <div class='col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-0 col-md-4 col-md-offset-0 col-lg-3 col-lg-offset-0'>
+        <img src="{{episode.artwork}}" alt = '{{episode.title}} Artwork' style='margin-top:40px; width:100%'></br>
+    </div>
+    <div class='col-xs-12 col-sm-7 col-md-8 col-lg-9'> 
+        <h1>{{episode.title}}</h1>
+        <small>From the show :</small> <a href='/show_detail/{{episode.show.pk}}'>{{episode.show}}</a></br>
+
+                        {%if episode.upvote_count > episode.downvote_count%}
+                        <a href='/vote_episode/{{episode.pk}}/1'><i class='fa fa-smile-o fa-2x' style='color:green'></i> ({{episode.upvote_count}})</a> | <a href = '/vote_episode/{{episode.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{episode.downvote_count}})</a>
+                        {%elif episode.downvote_count > episode.upvote_count%}
+                        <a href='/vote_episode/{{episode.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{episode.upvote_count}})</a> | <a href = '/vote_episode/{{episode.pk}}/2'> <i class='fa fa-frown-o fa-2x' style='color:#F74F4F'></i> ({{episode.downvote_count}})</a>
+                        {%else%}
+                        <a href='/vote_episode/{{episode.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{episode.upvote_count}})</a> | <a href = '/vote_episode/{{episode.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{episode.downvote_count}})</a>       
+                        {%endif%}</br>
+        {% if episode.imdb_id != '' %}
+            <a href='{{imdb}}'>IMDb</a></br>
+        {%endif%}
+
+        {% if episode.season_number != '' %}
+            Season {{episode.season_number}}</br>
+        {%endif%}
+
+        {% if episode.episode_number != '' %}
+            Episode {{episode.episode_number}}</br>
+        {%endif%}
+
+        {% if episode.first_aired != '' %}
+            {{episode.first_aired}}</br>
+        {%endif%}
+
+        {% if episode.overview != '' %}
+            {{episode.overview}}</br>
+        {%endif%}
+
+        </br>
+        </div>
+
+        <div class='col-xs-12'>
+                    <h3>Comments:</h3>
+                        <div class = 'col-xs-12 col-sm-10 col-md-8 col-lg-6' style='border: 2px solid grey;'>
+                            {% for comment in episode.comment_set.all %}
+                                {%if comment.is_reply == False%}
+                                    <div class = 'col-xs-1' style='margin-top:15px; padding:0px'>
+                                        <img src='{{comment.user.account_picture}}' style='width:35px;height:35px;margin-left:-15px; margin-top:-10px'>
+                                    </div>
+                                    <div class = 'col-xs-11' style='background:#{{comment.user.account_color.hex_value}}; padding:0px; margin-top:15px'>
+                                        &nbsp{{comment.user.account_name}} 
+                                    </div>
+                                    <div class = 'col-xs-11 col-xs-offset-1'>
+                                        {{comment.text}}
+                                        {%if comment.user == request.user %}
+                                            <a href='/remove_episode_comment/{{comment.pk}}/{{episode.pk}}'><button style='float:right' class="btn btn-xs btn-primary">Remove</button></a>
+                                        {%endif%}
+                                        <form method='GET' action='/respondepisode/{{episode.pk}}/{{comment.pk}}/1'>
+                                            {%csrf_token%}
+                                            <input type="text" name="response" placeholder='Respond'>
+                                            <input style = 'font-family: FontAwesome' type='submit' class="btn btn-xs btn-primary" value="&#xf27b;" />
+                                        </form>
+                                        <hr>
+                                    </div>
+                                {%endif%}       
+                                {% for response in comment.response_set.all %}
+                                {%if response.is_resp_to_reply == False%}
+                                    <div class = 'col-xs-1 col-xs-offset-1' style='padding:0px'>
+                                        <img src='{{response.user.account_picture}}' style='width:35px;height:35px;margin-left:-15px; margin-top:-10px'>
+                                    </div>
+                                    <div class = 'col-xs-10  col-xs-offset-0' style='background:#{{response.user.account_color.hex_value}}; padding:0px'>
+                                        &nbsp{{response.user.account_name}} 
+                                        <span style = 'float: right'>
+                                        @{{comment.user.account_name}}&nbsp
+                                        </span> 
+                                    </div>
+                                    <div class = 'col-xs-10  col-xs-offset-2'>
+                                        {{response.text}}
+                                        {%if response.user == request.user %}
+                                            <a href='/remove_episode_response/{{response.pk}}/{{episode.pk}}'><button style='float:right' class="btn btn-xs btn-primary">Remove</button></a>
+                                        {%endif%}
+                                        <form method='GET' action='/replyepisode/{{episode.pk}}/{{response.pk}}/'>
+                                            {%csrf_token%}
+                                            <input type="text" name="reply" placeholder='Respond'>
+                                            <input style = 'font-family: FontAwesome' type='submit' class="btn btn-xs btn-primary" value="&#xf27b;" />
+                                        </form>
+                                        <hr>
+                                    </div>     
+                                {%endif%}
+                                    {% for reply in response.reply_set.all %}
+                                    <div class = 'col-xs-1 col-xs-offset-2' style='padding:0px'>
+                                        <img src='{{reply.user.account_picture}}' style='width:35px;height:35px;margin-left:-15px; margin-top:-10px'>
+                                    </div>
+                                        <div class = 'col-xs-9 col-xs-offset-0' style='background:#{{reply.user.account_color.hex_value}}; padding:0px'>
+                                            &nbsp{{reply.user.account_name}}
+                                            <span style = 'float: right'>
+                                                @{{response.user.account_name}}&nbsp
+                                            </span>  
+                                        </div>
+                                        </br>
+                                        <div class = 'col-xs-9 col-xs-offset-3'>
+                                            {{reply.text}}
+                                            {%if reply.user == request.user %}
+                                            <a href='/remove_episode_reply/{{reply.pk}}/{{episode.pk}}'><button style='float:right' class="btn btn-xs btn-primary">Remove</button></a>
+                                            {%endif%}
+                                            <form method='GET' action='/respondepisode/{{episode.pk}}/{{reply.copy.pk}}/2'>
+                                                {%csrf_token%}
+                                                <input type="text" name="response" placeholder='Respond'>
+                                                <input style = 'font-family: FontAwesome' type='submit' class="btn btn-xs btn-primary" value="&#xf27b;" />
+                                            </form>
+                                            <hr>
+                                        </div>
+                                        {%for response in reply.copy.response_set.all %}
+                                                <div class = 'col-xs-1 col-xs-offset-3' style='padding:0px'>
+                                                <img src='{{response.user.account_picture}}' style='width:35px;height:35px;margin-left:-15px; margin-top:-10px'>
+                                                </div>
+                                                <div class = 'col-xs-8 col-xs-offset-0' style='background:#{{response.user.account_color.hex_value}}; padding:0px'>
+                                                &nbsp{{response.user.account_name}} 
+                                                <span style = 'float: right'>
+                                                    @{{reply.user.account_name}}&nbsp
+                                                </span> 
+                                                </div>
+                                                <div class = 'col-xs-8 col-xs-offset-4'>
+                                                {{response.text}}
+                                                {%if response.user == request.user %}
+                                                    <a href='/remove_episode_response/{{response.pk}}/{{episode.pk}}'><button style='float:right' class="btn btn-xs btn-primary">Remove</button></a>
+                                                {%endif%}
+                                                <hr>
+                                                </div>
+                                        {%endfor%}
+                                    {%endfor%}
+                                {%endfor%}
+                            {% endfor %}
+                        </div>
+                    </br>
+                    </div>
+                
+                <div class='col-xs-12' style='margin-left:0px'>
+                <br>
+                        <form method='GET' action='/commentepisode/{{episode.pk}}/'>
+                            {%csrf_token%}
+                            <input type="text" name="comment" placeholder = 'Comment'>
+                            <input style = 'font-family: FontAwesome' type='submit' class="btn btn-xs btn-primary" value="&#xf0e5;" />
+                        </form>
+                </div>
+            {%if episode.videosource_set.all.count != 0%}
+            <div class='col-xs-12' >
+            <h3>Video Sources</h3>
+            {%for source in episode.videosource_set.all%}
+                <a href='{{source.source_link}}'>{{source.display_name}}</a></br>
+            {%endfor%}
+
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</div>
+</br>
+{%endblock body%}

@@ -1,0 +1,85 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+
+<section id="main-slider" class="no-margin" style='margin-top:-10px'>
+        <div class="carousel slide wet-asphalt">
+            <div class="carousel-inner">
+                <div class="item active" style="background-image: url({% static 'images/slider/tvguide.jpg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="carousel-content" style='margin-top:400px; text-align:center'>
+                                    <h2 class="animation animated-item-1">VidSite</h2>
+                                    <h4 class="animation animated-item-2">Your guide to thousands of movies, shows, episodes, and channels.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.item-->
+                
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+    </section><!--/#main-slider-->
+
+    <section id="services" class="emerald">
+        <div class="container" >
+            <div class="row" style='margin-top:10px'>
+                <div class="col-md-3 col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <i class="icon-ticket icon-md"></i>
+                        </div>
+                        <a href = '/movie_search/'>
+                        <div class="media-body">
+                            <h3 class="media-heading" style='margin-top:15px'>Movie Search</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div><!--/.col-md-4-->
+                <div class="col-md-3 col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <i class="icon-film icon-md"></i>
+                        </div>
+                        <a href = '/show_search/'>
+                        <div class="media-body">
+                            <h3 class="media-heading" style='margin-top:15px'>Show Search</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div><!--/.col-md-4-->
+                <div class="col-md-3 col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <i class="icon-play icon-md"></i>
+                        </div>
+                        <a href = '/episode_search/'>
+                        <div class="media-body">
+                            <h3 class="media-heading" style='margin-top:15px'>Episode Search</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div><!--/.col-md-4-->
+                <div class="col-md-3 col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <i class="icon-desktop icon-md"></i>
+                        </div>
+                        <a href = '/channel_search/'>
+                        <div class="media-body">
+                            <h3 class="media-heading" style='margin-top:15px; text-align'>Channel Search</h3>
+                        </div>
+                        </a>
+                    </div>
+                </div><!--/.col-md-4-->
+            </div>
+        </div>
+    </section><!--/#services-->
+
+{%endblock body%}

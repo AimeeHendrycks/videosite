@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+
+<div class='col-xs-12' style='text-align:center'>
+    <img src='{{user.account_picture}}' style='height:150px; width:150px'>
+
+    <h2>{{user.email}}</h2>
+    </br></br>
+</div>
+
+
+    <div class='col-xs-6 col-xs-offset-2 col-sm-4 col-sm-offset-4' style='padding:0px; text-align:left'>
+    <form method='POST' action='' style='margin-bottom:20px'>
+    {%csrf_token%}
+    {{form.as_p}}
+    <input class="btn btn-sm btn-primary" type='submit' value = 'Update'>
+    </form>
+    </div>
+
+
+{%endblock body%}

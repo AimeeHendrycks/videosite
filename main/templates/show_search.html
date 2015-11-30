@@ -1,0 +1,101 @@
+{%extends 'base.html'%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+<div style='margin-top:-10px; text-align:center; background-color:#2ecc71'>
+<br>
+    <h1 style='color:black'>Shows</h1></br>
+</div>
+<br>
+<div style='text-align:center'>
+    <form action="/show_search/" method='GET'>
+    <input name='search' type='text' size='15' placeholder='Search' style="width: 30%; font-size:17px; text-align:center">
+    </form>
+</div>
+
+<!--Pagination-->
+<div style='text-align:center'>
+<div class="pagination">
+    <span class="page-links">
+        {% if page_obj.has_previous %}
+            {% if 'search' in request.GET %}
+                <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.previous_page_number }}">previous</a>
+            {% else %}
+                <a href="{{request.path}}?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+        {% endif %}
+
+        <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            {% if 'search' in request.GET %}
+                <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.next_page_number }}">next</a>
+            {% else %}
+                <a href="{{request.path}}?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        {% endif %}
+        
+    </span>
+</div>
+</div>
+
+</br>
+
+<!--Content-->
+<div class='row' style='margin:0px'>  
+    {%for show in object_list%}
+    <div class = 'col-lg-3 col-md-4 col-sm-6 col-xs-12' style='text-align:center; height:525px'>
+        <a href= '/show_detail/{{show.pk}}' >
+        <img id='show_image' src='{{show.artwork}}' alt='{{show.title}}' style='width:300px; height:400px'>
+        <div style='width:300px; height:50px; text-align:center; background:black; color:#fff; margin:0 auto; padding:5px'>
+        <b style='color:#fff; vertical-align:middle; height:100px'><h4>{{show.title}}</h4></b></br>
+        </div>
+        </a>
+        <div style='width:300px; height:35px; background:black; color:#fff; margin:0 auto'>
+            {%if show.upvote_count > show.downvote_count%}
+            <a href='/vote_show/{{show.pk}}/1'><i class='fa fa-smile-o fa-2x' style='color:green'></i> ({{show.upvote_count}})</a> | <a href = '/vote_show/{{show.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{show.downvote_count}})</a>
+            {%elif show.downvote_count > show.upvote_count%}
+            <a href='/vote_show/{{show.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{show.upvote_count}})</a> | <a href = '/vote_show/{{show.pk}}/2'> <i class='fa fa-frown-o fa-2x' style='color:#F74F4F'></i> ({{show.downvote_count}})</a>
+            {%else%}
+            <a href='/vote_show/{{show.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{show.upvote_count}})</a> | <a href = '/vote_show/{{show.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{show.downvote_count}})</a>       
+            {%endif%}
+        </div>
+    </div>
+    {%endfor%}
+</div>
+</br>
+
+<!--Pagination-->
+<div style='text-align:center'>
+<div class="pagination">
+    <span class="page-links">
+        {% if page_obj.has_previous %}
+            {% if 'search' in request.GET %}
+                <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.previous_page_number }}">previous</a>
+            {% else %}
+                <a href="{{request.path}}?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+        {% endif %}
+
+        <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            {% if 'search' in request.GET %}
+                <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.next_page_number }}">next</a>
+            {% else %}
+                <a href="{{request.path}}?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        {% endif %}
+        
+    </span>
+</div>
+</div>
+
+{%endblock body%}

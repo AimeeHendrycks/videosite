@@ -1,0 +1,78 @@
+{%extends 'base.html'%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+
+<div style='text-align:center'>
+    <form action="/person_search/" method='GET'>
+    <input name='search' type='text' size='15' placeholder='Search' style="width: 30%; font-size:17px; text-align:center; margin: 0 auto;">
+    </form>
+</div>
+
+<!--Pagination-->
+<div class="pagination">
+<span class="page-links">
+    {% if page_obj.has_previous %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.previous_page_number }}">previous</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+    {% endif %}
+
+    <span class="page-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.next_page_number }}">next</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    {% endif %}
+    
+</span>
+</div>
+
+</br>
+<!--{% if request.user.is_authenticated %}
+<a href='/artists_create/' class='button' style='margin:10px; margin-top:0px; text-align:center'>Create artist</a></br>
+{%endif%}-->
+<!--Content-->
+<div class='row'>  
+    {%for person in object_list%}
+    {{person.name}}
+    <img src='{{movie.artwork}}' alt='{{movie.title}}'>
+    </br>
+    {%endfor%}
+</div>
+<!--Pagination-->
+<div class="pagination">
+<span class="page-links">
+    {% if page_obj.has_previous %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.previous_page_number }}">previous</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+    {% endif %}
+
+    <span class="page-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.next_page_number }}">next</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    {% endif %}
+    
+</span>
+</div>
+{%endblock body%}

@@ -1,0 +1,193 @@
+{%extends 'base.html'%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+
+<div style='text-align:center'>
+    <form action="/general_search/" method='GET'>
+    <input name='search' type='text' size='15' placeholder='Search All' style="width: 30%; font-size:17px; text-align:center; margin: 0 auto;">
+    </form>
+</div>
+
+<!--Pagination
+<div class="pagination">
+<span class="page-links">
+    {% if page_obj.has_previous %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.previous_page_number }}">previous</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+    {% endif %}
+
+    <span class="page-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.next_page_number }}">next</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    {% endif %}
+    
+</span>
+</div>
+
+</br>-->
+<!--{% if request.user.is_authenticated %}
+<a href='/artists_create/' class='button' style='margin:10px; margin-top:0px; text-align:center'>Create artist</a></br>
+{%endif%}-->
+<!--Content-->
+</br>
+<div class='row'> 
+    <div id='movies' class='col-xs-10 col-xs-offset-1' style='border:2px solid grey'>
+        Movies</br>
+        </br>
+        {%for movie in movies%}
+        <div class = 'col-lg-2 col-sm-3 col-xs-6' style='text-align:center; height:350px'>
+        <a href= '/movie_detail/{{movie.pk}}' >
+        <img src='{{movie.artwork}}' alt='{{movie.title}}' style='width:175px; height:200px'>
+        <div style='width:175px; height:60px; background:#1F0635; color:#fff; margin:0 auto; padding:10px'>
+        <b>{{movie.title}}</b>
+        </div>
+        </a>
+            <div style='width:175px; height:40px; background:#1F0635; color:#fff; margin:0 auto'>
+            {%if movie.upvote_count > movie.downvote_count%}
+            <a href='/vote_movie/{{movie.pk}}/1'><i class='fa fa-smile-o fa-2x' style='color:green'></i> ({{movie.upvote_count}})</a> | <a href = '/vote_movie/{{movie.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{movie.downvote_count}})</a>
+            {%elif movie.downvote_count > movie.upvote_count%}
+            <a href='/vote_movie/{{movie.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{movie.upvote_count}})</a> | <a href = '/vote_movie/{{movie.pk}}/2'> <i class='fa fa-frown-o fa-2x' style='color:#F74F4F'></i> ({{movie.downvote_count}})</a>
+            {%else%}
+            <a href='/vote_movie/{{movie.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{movie.upvote_count}})</a> | <a href = '/vote_movie/{{movie.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{movie.downvote_count}})</a>       
+            {%endif%}
+            </div>
+        </div>
+    {%endfor%}
+    
+    <a href='/movie_search/'>More Movies...</a></br>
+    </div>
+    <br>
+    <div id='shows' class='col-xs-10 col-xs-offset-1' style='border:2px solid grey; margin-top:10px'>
+    Shows</br>
+    </br> 
+    {%for show in shows%}
+        <div class = 'col-lg-2 col-sm-3 col-xs-6' style='text-align:center; height:350px'>
+        <a href= '/show_detail/{{show.pk}}'>
+        <img src='{{show.artwork}}' alt='{{show.title}}' style='width:175px; height:200px'>    
+        <div style='width:175px; height:60px; background:#1F0635; color:#fff; margin:0 auto; padding:10px'>
+        <b>{{show.title}}</b>
+        </div>
+        </a>
+            <div style='width:175px; height:40px; background:#1F0635; color:#fff; margin:0 auto'>
+            {%if show.upvote_count > show.downvote_count%}
+            <a href='/vote_show/{{show.pk}}/1'><i class='fa fa-smile-o fa-2x' style='color:green'></i> ({{show.upvote_count}})</a> | <a href = '/vote_show/{{show.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{show.downvote_count}})</a>
+            {%elif show.downvote_count > show.upvote_count%}
+            <a href='/vote_show/{{show.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{show.upvote_count}})</a> | <a href = '/vote_show/{{show.pk}}/2'> <i class='fa fa-frown-o fa-2x' style='color:#F74F4F'></i> ({{show.downvote_count}})</a>
+            {%else%}
+            <a href='/vote_show/{{show.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{show.upvote_count}})</a> | <a href = '/vote_show/{{show.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{show.downvote_count}})</a>       
+            {%endif%}
+            </div>
+        </div>
+
+    {%endfor%}
+    
+    <a href='/show_search/'>More Shows...</a></br>
+    </div>
+    <!--__________________</br>
+    <div id='episodes'>
+    Episodes</br>
+    </br> 
+    {%for episode in episodes%}
+    <div class = 'col-xs-12 col-sm-6' style='height:200px; margin-bottom:10px'>
+        <div class='col-xs-6'><img src='{{episode.artwork}}' style='width:100%; height:200px'></div>
+        <div class='col-xs-6'>
+        <a href ='/episode_detail/{{episode.pk}}'>
+    S{{episode.season_number}} 
+                E{{episode.episode_number}}</br> 
+                {{episode.title}}</a></br>
+                <small>From the show :</small> <a href='/show_detail/{{episode.show.pk}}/'>{{episode.show.title}}</br>
+                {%if episode.upvote_count > episode.downvote_count%}
+                <a href='/vote_episode/{{episode.pk}}/1'><i class='fa fa-smile-o fa-2x' style='color:green'></i> ({{episode.upvote_count}})</a> | <a href = '/vote_episode/{{episode.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{episode.downvote_count}})</a>
+                {%elif episode.downvote_count > episode.upvote_count%}
+                <a href='/vote_episode/{{episode.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{episode.upvote_count}})</a> | <a href = '/vote_episode/{{episode.pk}}/2'> <i class='fa fa-frown-o fa-2x' style='color:#F74F4F'></i> ({{episode.downvote_count}})</a>
+                {%else%}
+                <a href='/vote_episode/{{episode.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{episode.upvote_count}})</a> | <a href = '/vote_episode/{{episode.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{episode.downvote_count}})</a>       
+                {%endif%}
+                </div>
+        </div>
+    </a>
+    {%endfor%}
+    
+    <a href='/episode_search/'>More Episodes...</a></br>-->
+
+    <div id='channels' class='col-xs-10 col-xs-offset-1' style='border:2px solid grey; margin-top:10px'>
+    Channels</br>
+    </br> 
+    
+    {%for channel in channels%}
+    <div class = 'col-lg-2 col-md-3 col-sm-4 col-xs-12' style='text-align:center; height:300px'>
+    <a href= '/channel_detail/{{channel.pk}}' >
+    <img id='channel_image' src='{{channel.artwork}}' alt='{{channel.title}}' style='width:200px; height:175px'>
+    <div style='width:200px; height:60px; text-align:center; background:#1F0635; color:#fff; margin:0 auto; padding:5px'>
+    <b style='color:#fff; vertical-align:middle; height:100px'><h4>{{channel.title}}</h4></b></br>
+    </div>
+    </a>
+    <div style='width:200px; height:40px; background:#1F0635; color:#fff; margin:0 auto'>
+        {%if channel.upvote_count > channel.downvote_count%}
+        <a href='/vote_channel/{{channel.pk}}/1'><i class='fa fa-smile-o fa-2x' style='color:green'></i> ({{channel.upvote_count}})</a> | <a href = '/vote_channel/{{channel.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{channel.downvote_count}})</a>
+        {%elif channel.downvote_count > channel.upvote_count%}
+        <a href='/vote_channel/{{channel.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{channel.upvote_count}})</a> | <a href = '/vote_channel/{{channel.pk}}/2'> <i class='fa fa-frown-o fa-2x' style='color:#F74F4F'></i> ({{channel.downvote_count}})</a>
+        {%else%}
+        <a href='/vote_channel/{{channel.pk}}/1'><i class='fa fa-smile-o fa-lg' style='color:green'></i> ({{channel.upvote_count}})</a> | <a href = '/vote_channel/{{channel.pk}}/2'> <i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i> ({{channel.downvote_count}})</a>       
+        {%endif%}
+        </div>
+    </div>
+    {%endfor%}
+    
+    <a href='/channel_search/'>More Channels...</a></br>
+    </div>
+  
+    <!--<div id='people'
+    People</br>
+    </br> 
+    {%for person in people%}
+    {{person.name}}
+    </br>
+    </br>
+    {%endfor%}
+    </div>
+    __________________
+    </br>-->
+
+    
+</div>
+<!--Pagination
+<div class="pagination">
+<span class="page-links">
+    {% if page_obj.has_previous %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.previous_page_number }}">previous</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+    {% endif %}
+
+    <span class="page-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        {% if 'search' in request.GET %}
+            <a href="{{request.path}}?search={{request.GET.search}}&page={{ page_obj.next_page_number }}">next</a>
+        {% else %}
+            <a href="{{request.path}}?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    {% endif %}
+    
+</span>
+</div>-->
+{%endblock body%}

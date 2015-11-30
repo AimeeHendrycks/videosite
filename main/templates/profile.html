@@ -1,0 +1,117 @@
+{%extends 'base.html'%}
+{%block body%}
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+<div style='text-align:center'>
+<img src='{{user.account_picture}}' style='height:150px; width:150px'>
+
+<h2>{{user.email}}</h2>
+{%if user.account_name != None%}
+    <h2>{{user.account_name}}</h2>
+{%else%}
+    <h3>No username has been set</h3>
+{%endif%}
+<a class="btn btn-md btn-primary" href="/profile_update/{{user.pk}}">Update Profile</a>
+</div>
+</br></br>
+
+<div class='col-xs-10 col-xs-offset-1'>
+<div class='col-lg-3 col-sm-6 ' style='text-align:center; height:350px'>
+<h3><u>Movielist</u></h3></br>
+{%if user.movie.all.count != 0 %}
+<ul style='height:175px; overflow:hidden; overflow-y:scroll; list-style-type:none; border:2px solid black'>
+    {%for movie in user.movie.all %}
+    <br>
+        <li><a href='/movie_detail/{{movie.pk}}'>{{movie.title}}</a>
+        <br>
+        <form method='GET' action='/remove_movie/{{movie.pk}}/'>
+            {%csrf_token%}
+            <input class="btn btn-xs btn-primary" type='submit' value='Remove'>
+        </form></li><hr>
+    {%endfor%}
+</ul>
+    </br>
+    <a href = '/movie_search/' class='col-xs-12'>Explore More...</a>
+{%else%}
+    There are no movies in your personal list. <a href = '/movie_search/'>Explore Movies</a>
+{%endif%}
+</div>
+
+<div class='col-lg-3 col-sm-6 ' style='text-align:center; height:350px'>
+<h3><u>Showlist</u></h3></br>
+{%if user.show.all.count != 0 %}
+
+<ul style='height:175px; overflow:hidden; overflow-y:scroll; list-style-type:none; border:2px solid black'>
+    {% for show in user.show.all %}
+    <br>
+        <li><a href='/show_detail/{{show.pk}}'>{{show.title}}</a>
+        <br>
+        <form method='GET' action='/remove_show/{{show.pk}}/'>
+            {%csrf_token%}
+            <input class="btn btn-xs btn-primary" type='submit' value='Remove'>
+        </form></li><hr>
+    {%endfor%}
+</ul>
+    </br>
+        <a href = '/show_search/' class='col-xs-12'>Explore More...</a>
+
+{%else%}
+    There are no shows in your personal list. <a href = '/show_search/'>Explore Shows</a>
+{%endif%}
+</div>
+
+<div class='col-lg-3 col-sm-6 ' style='text-align:center; height:350px'>
+<h3><u>Votes</u></h3></br>
+<ul style='height:275px; overflow:hidden; overflow-y:scroll; list-style-type:none; border:2px solid black'>
+{%if user.vote_set.all.count != 0%}
+    {%for vote in user.vote_set.all%}
+        <li>{% if vote.vote_type == 'up'%}
+        <br>
+            <a href='/episode_detail/{{vote.episode.pk}}/'>{{vote.episode.title}}</a>
+            <a href='/movie_detail/{{vote.movie.pk}}/'>{{vote.movie.title}}</a>
+            <a href='/show_detail/{{vote.show.pk}}/'>{{vote.show.title}}</a>
+            <a href='/channel_detail/{{vote.channel.pk}}/'>{{vote.channel.title}}</a>
+            <br><br> <i class='fa fa-smile-o fa-lg' style='color:green'></i></br><hr>
+        {%elif vote.vote_type == 'down'%}
+        <br>
+            <a href='/episode_detail/{{vote.episode.pk}}/'>{{vote.episode.title}}</a>
+            <a href='/movie_detail/{{vote.movie.pk}}/'>{{vote.movie.title}}</a>
+            <a href='/show_detail/{{vote.show.pk}}/'>{{vote.show.title}}</a>
+            <a href='/channel_detail/{{vote.channel.pk}}/'>{{vote.channel.title}}</a> 
+            <br><br><i class='fa fa-frown-o fa-lg' style='color:#F74F4F'></i></br><hr>
+        {%endif%}</li>
+    {%endfor%}
+{%else%}
+<br>
+    <li> You have not voted on anything yet. </li>
+{%endif%}
+</ul>
+</div>
+
+
+<div class='col-lg-3 col-sm-6 ' style='text-align:center; height:350px'>
+<h3><u>Comments</u></h3></br>
+<ul style='height:275px; overflow:hidden; overflow-y:scroll; list-style-type:none; border:2px solid black'>
+{%if user.comment_set.all.count != 0%}
+    {%for comment in user.comment_set.all%}
+    <br>
+        <li><a href='/episode_detail/{{comment.episode.pk}}/'>{{comment.episode.title}}</a>
+        <a href='/movie_detail/{{comment.movie.pk}}/'>{{comment.movie.title}}</a>
+        <a href='/show_detail/{{comment.show.pk}}/'>{{comment.show.title}}</a>
+        <a href='/channel_detail/{{comment.channel.pk}}/'>{{comment.channel.title}}</a>
+
+        <br><br>
+        <i>"{{comment.text}}"</i></li>
+        </br><hr>
+    {%endfor%}
+{%else%}
+    <br>
+    <li> You have not commented on anything yet. </li>
+{%endif%}
+</ul>
+</div>
+</div>
+{%endblock body%}
