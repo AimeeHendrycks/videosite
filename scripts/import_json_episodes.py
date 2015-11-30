@@ -7,7 +7,7 @@ from unidecode import unidecode
 import django
 django.setup()
 from django.conf import settings
-from main.models import Episode
+from main.models import Episode, Show
 
 with open('episode_json.txt') as data_file:
     data = json.load(data_file)
@@ -24,7 +24,7 @@ for episode in data:
     new_episode.first_aired = episode['first_aired']
     new_episode.season_number = episode['season_number']
     new_episode.episode_number = episode['episode_number']
-    new_episode.show = episode['show']
+    new_episode.show = Show.objects.get(pk=show)
     new_episode.artwork = episode['artwork']
     if episode['overview'] != None:
         new_episode.overview = str(unidecode(episode['overview']))
