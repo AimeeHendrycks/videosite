@@ -11,7 +11,6 @@ from main.models import Episode
 
 with open('episode_json.txt') as data_file:
     data = json.load(data_file)
-from unidecode import unidecode
 
 # print data
 for episode in data:
