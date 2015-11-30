@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-import requests, sys, os, pprint, json
+import sys, os, pprint, json
 sys.path.append("..")  
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+from unidecode import unidecode
 
 import django
 django.setup()
