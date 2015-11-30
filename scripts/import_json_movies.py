@@ -1,13 +1,22 @@
 #!/usr/bin/env python
-import json
+import requests, sys, os, pprint, json
+sys.path.append("..")  
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+
+import django
+django.setup()
+from django.conf import settings
+from main.models import Movie
 
 with open('movie_json.txt') as data_file:
     data = json.load(data_file)
 
-print data
+# print data
 for movie in data:
     new_movie, created = Movie.objects.get_or_create(movie_id=str(unidecode(movie['movie_id'])))
+    print new_movie.movie_id
     new_movie.title = movie['title']
+    print new_movie.title
     new_movie.imdb_id = movie['imdb_id']
     new_movie.release_date = movie['release_date']
     new_movie.rating = movie['rating']
