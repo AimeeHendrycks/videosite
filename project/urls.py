@@ -18,7 +18,7 @@ from django.contrib import admin
 from main import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^home/$', views.home),
+    url(r'^$', views.home),
     url(r'^base/$', views.base),
 
     url(r'^please_login/$', views.please_login),
@@ -86,16 +86,10 @@ urlpatterns = [
     url(r'^replychannel/(?P<pk1>\d+)/(?P<pk2>\d+)/$', views.replychannel),
     url(r'^remove_channel_reply/(?P<reply_pk>\d+)/(?P<channel_pk>\d+)/$', views.remove_channel_reply),
 
-    url(r'^nopage', views.nopage),
-
     url(r'^vote_movie/(?P<pk>\d+)/(?P<num>\d+)/$', views.vote_movie),
     url(r'^vote_show/(?P<pk>\d+)/(?P<num>\d+)/$', views.vote_show),
     url(r'^vote_episode/(?P<pk>\d+)/(?P<num>\d+)/$', views.vote_episode),
     url(r'^vote_channel/(?P<pk>\d+)/(?P<num>\d+)/$', views.vote_channel),
-
-
-
-
 
     url(r'^login/$', views.login_view),
     url(r'^signup/$', views.signup),

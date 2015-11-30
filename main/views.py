@@ -13,12 +13,6 @@ def base(request):
     context = {}
     return render_to_response('base.html', context, context_instance=RequestContext(request))   
 
-
-def nopage(request):
-    context = {}
-    return render_to_response('404.html', context, context_instance=RequestContext(request))   
-
-
 def please_login(request):
     context = {}
     return render_to_response('please_login.html', context, context_instance=RequestContext(request))   
