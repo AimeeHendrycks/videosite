@@ -16,6 +16,7 @@ with open('movie_json.txt') as data_file:
 for movie in data:
     new_movie, created = Movie.objects.get_or_create(movie_id=movie['movie_id'])
     print new_movie.movie_id
+    print '<<' + new_movie.pk +'>>'
     new_movie.title = str(unidecode(movie['title']))
     print new_movie.title
     new_movie.imdb_id = movie['imdb_id']
@@ -27,3 +28,4 @@ for movie in data:
     new_movie.upvote_count = movie['upvote_count']
     new_movie.downvote_count = movie['downvote_count']
     new_movie.save()
+    print '<<' + new_movie.pk +'>>'
