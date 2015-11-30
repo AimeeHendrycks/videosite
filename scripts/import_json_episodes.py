@@ -24,7 +24,7 @@ for episode in data:
     new_episode.first_aired = episode['first_aired']
     new_episode.season_number = episode['season_number']
     new_episode.episode_number = episode['episode_number']
-    new_episode.show = Show.objects.get(pk=show)
+    new_episode.show = Show.objects.get(pk=episode['show'])
     new_episode.artwork = episode['artwork']
     if episode['overview'] != None:
         new_episode.overview = str(unidecode(episode['overview']))
