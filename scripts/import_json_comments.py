@@ -23,16 +23,16 @@ for comment in data:
         print new_comment.is_reply
         new_comment.user = CustomUser.objects.get(pk=comment['user'])
         print new_comment.user
-        if comment['comment_type'] = 'movie':
+        if comment['comment_type'] == 'movie':
             new_comment.movie = Movie.objects.get(pk=comment['movie'])
             print new_comment.movie
-        if comment['comment_type'] = 'show':
+        if comment['comment_type'] == 'show':
             new_comment.show = Show.objects.get(pk=comment['show'])
             print new_comment.show
-        if comment['comment_type'] = 'episode':
+        if comment['comment_type'] == 'episode':
             new_comment.episode = Episode.objects.get(pk=comment['episode'])
             print new_comment.episode
-        if comment['comment_type'] = 'channel':
+        if comment['comment_type'] == 'channel':
             new_comment.channel = Channel.objects.get(pk=comment['channel'])
             print new_comment.channel
         # new_comment.save()
@@ -55,16 +55,16 @@ for response in data:
         print new_response.original_comment
         new_response.user = CustomUser.objects.get(pk=response['user'])
         print new_response.user
-        if response['response_type'] = 'movie':
+        if response['response_type'] == 'movie':
             new_response.movie = Movie.objects.get(pk=response['movie'])
             print new_response.movie
-        if response['response_type'] = 'show':
+        if response['response_type'] == 'show':
             new_response.show = Show.objects.get(pk=response['show'])
             print new_response.show
-        if response['response_type'] = 'episode':
+        if response['response_type'] == 'episode':
             new_response.episode = Episode.objects.get(pk=response['episode'])
             print new_response.episode
-        if response['response_type'] = 'channel':
+        if response['response_type'] == 'channel':
             new_response.channel = Channel.objects.get(pk=response['channel'])
             print new_response.channel
         # new_response.save()
