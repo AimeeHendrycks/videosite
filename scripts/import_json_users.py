@@ -9,7 +9,7 @@ django.setup()
 from django.conf import settings
 from main.models import Color, CustomUser
 
-with open('user_json.txt') as data_file:
+with open('color_json.txt') as data_file:
     data = json.load(data_file)
 
 # print data
