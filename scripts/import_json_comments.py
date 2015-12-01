@@ -38,12 +38,14 @@ for comment in data:
         # new_comment.save()
 
         print '<<' + str(new_comment.pk) +'>>'
+        print '.............'
 
 
 with open('response_json.txt') as data_file:
     data = json.load(data_file)
-
+print '-----------'
 print data
+
 for response in data:
     if response['date_created'] != '':
         new_response, created = Response.objects.get_or_create(date=response['date_created'])
@@ -70,13 +72,15 @@ for response in data:
         # new_response.save()
 
         print '<<' + str(new_response.pk) +'>>'
+        print '.............'
 
 
 
 with open('reply_json.txt') as data_file:
     data = json.load(data_file)
-
+print '-------------'
 print data
+
 for reply in data:
     if reply['date_created'] != '':
         new_reply, created = Reply.objects.get_or_create(date=reply['date_created'])
@@ -103,4 +107,5 @@ for reply in data:
         # new_reply.save()
 
         print '<<' + str(new_reply.pk) +'>>'
+        print '.............'
 
