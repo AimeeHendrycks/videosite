@@ -210,7 +210,7 @@ class Comment(models.Model):
     show = models.ForeignKey(Show, null=True, blank=True)
     episode = models.ForeignKey(Episode, null=True, blank=True)
     channel = models.ForeignKey(Channel, null=True, blank=True)
-
+    date = models.CharField(max_length=500, null=True, blank=True)
     def __unicode__(self):
         return self.text
 
@@ -224,7 +224,7 @@ class Response(models.Model):
     show = models.ForeignKey(Show, null=True, blank=True)
     episode = models.ForeignKey(Episode, null=True, blank=True)
     channel = models.ForeignKey(Channel, null=True, blank=True)
-
+    date = models.CharField(max_length=500, null=True, blank=True)
     def __unicode__(self):
         return self.text
 
@@ -238,7 +238,7 @@ class Reply(models.Model):
     show = models.ForeignKey(Show, null=True, blank=True)
     episode = models.ForeignKey(Episode, null=True, blank=True)
     channel = models.ForeignKey(Channel, null=True, blank=True)
-
+    date = models.CharField(max_length=500, null=True, blank=True)
     def __unicode__(self):
         return self.text
 
