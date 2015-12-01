@@ -16,21 +16,23 @@ inc = 0
 for episode in data:
     inc += 1
     print inc
-    new_episode, created = Episode.objects.get_or_create(episode_id=episode['episode_id'])
-    print new_episode.episode_id
-    if episode['title'] != None:
-        new_episode.title = str(unidecode(episode['title']))
-        print new_episode.title
-    new_episode.imdb_id = episode['imdb_id']
-    new_episode.first_aired = episode['first_aired']
-    new_episode.season_number = episode['season_number']
-    new_episode.episode_number = episode['episode_number']
-    new_episode.show = Show.objects.get(pk=episode['show'])
-    new_episode.artwork = episode['artwork']
-    if episode['overview'] != None:
-        new_episode.overview = str(unidecode(episode['overview']))
-    new_episode.upvote_count = episode['upvote_count']
-    new_episode.downvote_count = episode['downvote_count']
-    new_episode.save()
-    
-    print '<<' + str(new_episode.pk) +'>>'
+    if inc >= 37198:
+
+        new_episode, created = Episode.objects.get_or_create(episode_id=episode['episode_id'])
+        print new_episode.episode_id
+        if episode['title'] != None:
+            new_episode.title = str(unidecode(episode['title']))
+            print new_episode.title
+        new_episode.imdb_id = episode['imdb_id']
+        new_episode.first_aired = episode['first_aired']
+        new_episode.season_number = episode['season_number']
+        new_episode.episode_number = episode['episode_number']
+        new_episode.show = Show.objects.get(pk=episode['show'])
+        new_episode.artwork = episode['artwork']
+        if episode['overview'] != None:
+            new_episode.overview = str(unidecode(episode['overview']))
+        new_episode.upvote_count = episode['upvote_count']
+        new_episode.downvote_count = episode['downvote_count']
+        new_episode.save()
+        
+        print '<<' + str(new_episode.pk) +'>>'
