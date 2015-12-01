@@ -7,7 +7,7 @@ from unidecode import unidecode
 import django
 django.setup()
 from django.conf import settings
-from main.models import Color, CustomUser
+from main.models import Color, CustomUser, Show, Movie
 
 with open('color_json.txt') as data_file:
     data = json.load(data_file)
