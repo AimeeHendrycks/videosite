@@ -37,7 +37,7 @@ for user in data:
         new_user.account_name = str(unidecode(user['account_name']))
         print new_user.account_name
     
-    new_user.account_color = Color.objects.get(hex_value=user['account_color'])
+    new_user.account_color = Color.objects.get(title=user['account_color'])
     new_user.account_picture = user['account_picture']
     new_user.is_staff = user['is_staff']
     new_user.is_active = user['is_active']
