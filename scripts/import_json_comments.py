@@ -51,7 +51,7 @@ for response in data:
         print new_response.text
         new_response.is_resp_to_reply = response['is_resp_to_reply']
         print new_response.is_resp_to_reply
-        new_response.original_comment = Comment.objects.get(pk=int(response['original_comment']))
+        new_response.original_comment = Comment.objects.get(date=response['original_comment'])
         print new_response.original_comment
         new_response.user = CustomUser.objects.get(email=response['user'])
         print new_response.user
@@ -82,7 +82,7 @@ for reply in data:
         new_reply, created = Reply.objects.get_or_create(date=reply['date_created'])
         new_reply.text = reply['text']
         print new_reply.text
-        new_reply.original_response = Response.objects.get(pk=reply['original_response'])
+        new_reply.original_response = Response.objects.get(date=reply['original_response'])
         print new_reply.original_response
         new_reply.copy, created = Comment.objects.get_or_create(date=reply['date_created'])
         print new_reply.copy.text
