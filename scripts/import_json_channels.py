@@ -14,7 +14,6 @@ with open('channel_json.txt') as data_file:
 
 # print data
 for channel in data:
-    try:
         new_channel, created = Channel.objects.get_or_create(channel_id=channel['channel_id'])
         print new_channel.channel_id
         if channel['title'] != None:
@@ -24,10 +23,10 @@ for channel in data:
         new_channel.artwork = channel['artwork']
         for s in channel['shows']:
             new_channel.show.add(Show.objects.get(show_id=show))
+            print new_channel.show.title
         new_channel.runtime = channel['runtime']
         new_channel.upvote_count = channel['upvote_count']
         new_channel.downvote_count = channel['downvote_count']
         new_channel.save()
-    except:
-        print 'Nonetype'
+
     print '<<' + str(new_channel.pk) +'>>'
