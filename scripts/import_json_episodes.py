@@ -16,7 +16,7 @@ inc = 0
 for episode in data:
     inc += 1
     print inc
-    if inc >= 37198:
+    if inc >= 73333:
 
         new_episode, created = Episode.objects.get_or_create(episode_id=episode['episode_id'])
         print new_episode.episode_id
