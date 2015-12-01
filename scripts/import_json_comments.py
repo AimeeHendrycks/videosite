@@ -67,7 +67,7 @@ for response in data:
 with open('reply_json.txt') as data_file:
     data = json.load(data_file)
 
-# print data
+print data
 for reply in data:
     if reply['date_created'] != '':
         new_reply, created = Reply.objects.get_or_create(date=reply['date_created'])
