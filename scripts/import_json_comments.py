@@ -51,7 +51,7 @@ for response in data:
         print new_response.text
         new_response.is_resp_to_reply = response['is_resp_to_reply']
         print new_response.is_resp_to_reply
-        new_response.original_comment = Comment.objects.get(pk=response['original_comment'])
+        new_response.original_comment = Comment.objects.get(pk=int(response['original_comment']))
         print new_response.original_comment
         new_response.user = CustomUser.objects.get(email=response['user'])
         print new_response.user
