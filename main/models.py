@@ -160,8 +160,8 @@ class CustomUserManager(BaseUserManager):
         return self._create_user(email, password, True, True, **extra_fields)
 
 class Color(models.Model):
-    hex_value = models.CharField('hex-value', max_length=255, blank=True, null=True)
-    title = models.CharField('title', max_length=255, blank=True, null=True)
+    hex_value = models.CharField(max_length=255, blank=True, null=True)
+    title = models.CharField(max_length=255, blank=True, null=True)
 
     def __unicode__(self):
         return self.title
