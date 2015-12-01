@@ -15,7 +15,7 @@ with open('color_json.txt') as data_file:
 # print data
 for color in data:
     new_color, created = Color.objects.get_or_create(title=color['title'])
-    print new_color.hex_value
+    print new_color.title
     
     new_color.hex_value = color['hex_value']
     
@@ -37,7 +37,7 @@ for user in data:
         new_user.account_name = str(unidecode(user['account_name']))
         print new_user.account_name
     
-    new_user.account_color = user['account_color']
+    new_user.account_color = Color.objects.get(hex_value=user['account_color'])
     new_user.account_picture = user['account_picture']
     new_user.is_staff = user['is_staff']
     new_user.is_active = user['is_active']
