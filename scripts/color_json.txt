@@ -1,0 +1,1 @@
+[{"hex_value": "C6B2F7", "title": "Purple"}, {"hex_value": "91DEFF", "title": "Blue"}, {"hex_value": "8EEB8A", "title": "Green"}, {"hex_value": "FF7575", "title": "Red"}, {"hex_value": "FFFCB0", "title": "Yellow"}, {"hex_value": "FFB87A", "title": "Orange"}, {"hex_value": "FFA6DE", "title": "Pink"}, {"hex_value": "BDBDBD", "title": "Gray"}]
