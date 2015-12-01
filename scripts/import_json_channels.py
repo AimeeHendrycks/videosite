@@ -22,7 +22,7 @@ for channel in data:
     
     new_channel.artwork = channel['artwork']
     for s in channel['shows']:
-        new_channel.show.add(Show.objects.get(show_id=show))
+        new_channel.show.add(Show.objects.get(show_id=s))
         print new_channel.show.title
     new_channel.runtime = channel['runtime']
     new_channel.upvote_count = channel['upvote_count']
