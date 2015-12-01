@@ -16,6 +16,7 @@ print data
 for comment in data:
     if comment['date_created'] != '':
         new_comment, created = Comment.objects.get_or_create(date=comment['date_created'])
+        print 'comment made'
         new_comment.text = comment['text']
         print new_comment.text
         new_comment.is_reply = comment['is_reply']
