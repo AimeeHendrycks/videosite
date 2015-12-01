@@ -12,7 +12,7 @@ from main.models import Comment, Reply, Response, CustomUser, Movie, Show, Episo
 with open('comment_json.txt') as data_file:
     data = json.load(data_file)
 
-# print data
+print data
 for comment in data:
     if comment['date_created'] != '':
         new_comment, created = Comment.objects.get_or_create(date=comment['date_created'])
@@ -38,7 +38,7 @@ for comment in data:
 with open('response_json.txt') as data_file:
     data = json.load(data_file)
 
-# print data
+print data
 for response in data:
     if response['date_created'] != '':
         new_response, created = Response.objects.get_or_create(date=response['date_created'])
