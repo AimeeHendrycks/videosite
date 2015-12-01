@@ -24,7 +24,7 @@ for channel in data:
     for s in channel['shows']:
         print s
         new_channel.show.add(Show.objects.get(show_id=s))
-        print new_channel.show.show_id
+        
     new_channel.upvote_count = channel['upvote_count']
     new_channel.downvote_count = channel['downvote_count']
     new_channel.save()
