@@ -88,16 +88,16 @@ for reply in data:
         print new_reply.copy.text
         new_reply.user = CustomUser.objects.get(email=reply['user'])
         print new_reply.user
-        if response['reply_type'] == 'movie':
+        if reply['reply_type'] == 'movie':
             new_reply.movie = Movie.objects.get(pk=reply['movie'])
             print new_reply.movie
-        if response['reply_type'] == 'show':
+        if reply['reply_type'] == 'show':
             new_reply.show = Show.objects.get(pk=reply['show'])
             print new_reply.show
-        if response['reply_type'] == 'episode':
+        if reply['reply_type'] == 'episode':
             new_reply.episode = Episode.objects.get(pk=reply['episode'])
             print new_reply.episode
-        if response['reply_type'] == 'channel':
+        if reply['reply_type'] == 'channel':
             new_reply.channel = Channel.objects.get(pk=reply['channel'])
             print new_reply.channel
         # new_reply.save()
