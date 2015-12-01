@@ -1,1 +1,1 @@
-[{"original_response": 54, "show": 1, "text": "Very!", "user": 2, "date_created": "2015-11-30 19:54:35.615016+00:00", "copy": 106}]
+[{"original_response": 54, "show": 1, "text": "Very!", "user": 2, "reply_type": "show", "date_created": "2015-11-30 19:54:35.615016+00:00", "copy": 106}]

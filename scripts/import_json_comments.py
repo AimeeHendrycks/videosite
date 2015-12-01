@@ -23,14 +23,18 @@ for comment in data:
         print new_comment.is_reply
         new_comment.user = CustomUser.objects.get(pk=comment['user'])
         print new_comment.user
-        new_comment.movie = Movie.objects.get(pk=comment['movie'])
-        print new_comment.movie
-        new_comment.show = Show.objects.get(pk=comment['show'])
-        print new_comment.show
-        new_comment.episode = Episode.objects.get(pk=comment['episode'])
-        print new_comment.episode
-        new_comment.channel = Channel.objects.get(pk=comment['channel'])
-        print new_comment.channel
+        if comment['comment_type'] = 'movie':
+            new_comment.movie = Movie.objects.get(pk=comment['movie'])
+            print new_comment.movie
+        if comment['comment_type'] = 'show':
+            new_comment.show = Show.objects.get(pk=comment['show'])
+            print new_comment.show
+        if comment['comment_type'] = 'episode':
+            new_comment.episode = Episode.objects.get(pk=comment['episode'])
+            print new_comment.episode
+        if comment['comment_type'] = 'channel':
+            new_comment.channel = Channel.objects.get(pk=comment['channel'])
+            print new_comment.channel
         # new_comment.save()
 
         print '<<' + str(new_comment.pk) +'>>'
@@ -51,14 +55,18 @@ for response in data:
         print new_response.original_comment
         new_response.user = CustomUser.objects.get(pk=response['user'])
         print new_response.user
-        new_response.movie = Movie.objects.get(pk=response['movie'])
-        print new_response.movie
-        new_response.show = Show.objects.get(pk=response['show'])
-        print new_response.show
-        new_response.episode = Episode.objects.get(pk=response['episode'])
-        print new_response.episode
-        new_response.channel = Channel.objects.get(pk=response['channel'])
-        print new_response.channel
+        if response['response_type'] = 'movie':
+            new_response.movie = Movie.objects.get(pk=response['movie'])
+            print new_response.movie
+        if response['response_type'] = 'show':
+            new_response.show = Show.objects.get(pk=response['show'])
+            print new_response.show
+        if response['response_type'] = 'episode':
+            new_response.episode = Episode.objects.get(pk=response['episode'])
+            print new_response.episode
+        if response['response_type'] = 'channel':
+            new_response.channel = Channel.objects.get(pk=response['channel'])
+            print new_response.channel
         # new_response.save()
 
         print '<<' + str(new_response.pk) +'>>'
@@ -80,14 +88,18 @@ for reply in data:
         print new_reply.copy.text
         new_reply.user = CustomUser.objects.get(pk=reply['user'])
         print new_reply.user
-        new_reply.movie = Movie.objects.get(pk=reply['movie'])
-        print new_reply.movie
-        new_reply.show = Show.objects.get(pk=reply['show'])
-        print new_reply.show
-        new_reply.episode = Episode.objects.get(pk=reply['episode'])
-        print new_reply.episode
-        new_reply.channel = Channel.objects.get(pk=reply['channel'])
-        print new_reply.channel
+        if response['reply_type'] = 'movie':
+            new_reply.movie = Movie.objects.get(pk=reply['movie'])
+            print new_reply.movie
+        if response['reply_type'] = 'show':
+            new_reply.show = Show.objects.get(pk=reply['show'])
+            print new_reply.show
+        if response['reply_type'] = 'episode':
+            new_reply.episode = Episode.objects.get(pk=reply['episode'])
+            print new_reply.episode
+        if response['reply_type'] = 'channel':
+            new_reply.channel = Channel.objects.get(pk=reply['channel'])
+            print new_reply.channel
         # new_reply.save()
 
         print '<<' + str(new_reply.pk) +'>>'
