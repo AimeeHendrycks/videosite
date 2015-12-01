@@ -42,7 +42,8 @@ for user in data:
     new_user.is_staff = user['is_staff']
     new_user.is_active = user['is_active']
     new_user.is_superuser = user['is_superuser']
-    new_user.password = user['password']    for s in user['shows']:
+    new_user.password = user['password']
+    for s in user['shows']:
         print str(s) + ' show'
         new_user.show.add(Show.objects.get(show_id=s))
     for m in user['movies']:
