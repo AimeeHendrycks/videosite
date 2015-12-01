@@ -21,7 +21,7 @@ for comment in data:
         print new_comment.text
         new_comment.is_reply = comment['is_reply']
         print new_comment.is_reply
-        new_comment.user = CustomUser.objects.get(pk=comment['user'])
+        new_comment.user = CustomUser.objects.get(email=comment['user'])
         print new_comment.user
         if comment['comment_type'] == 'movie':
             new_comment.movie = Movie.objects.get(pk=comment['movie'])
@@ -53,7 +53,7 @@ for response in data:
         print new_response.is_resp_to_reply
         new_response.original_comment = Comment.objects.get(pk=response['original_comment'])
         print new_response.original_comment
-        new_response.user = CustomUser.objects.get(pk=response['user'])
+        new_response.user = CustomUser.objects.get(email=response['user'])
         print new_response.user
         if response['response_type'] == 'movie':
             new_response.movie = Movie.objects.get(pk=response['movie'])
@@ -86,7 +86,7 @@ for reply in data:
         print new_reply.original_response
         new_reply.copy, created = Comment.objects.get_or_create(date=reply['date_created'])
         print new_reply.copy.text
-        new_reply.user = CustomUser.objects.get(pk=reply['user'])
+        new_reply.user = CustomUser.objects.get(email=reply['user'])
         print new_reply.user
         if response['reply_type'] == 'movie':
             new_reply.movie = Movie.objects.get(pk=reply['movie'])
