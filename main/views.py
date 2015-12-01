@@ -63,7 +63,7 @@ def login_view(request):
             auth_user = authenticate(email=email, password=password)
             if auth_user is not None:
                 login(request, auth_user)
-                return HttpResponseRedirect('/home/')
+                return HttpResponseRedirect('/')
             else:
                 context['valid'] = "Invalid User"
         else:
@@ -92,13 +92,13 @@ def profile(request, pk):
         return render_to_response('profile.html', context, context_instance=RequestContext(request))
     else:
         print 'No!'
-        return redirect('/home/')
+        return redirect('/')
 
 class ProfileUpdate(UpdateView):
     model = CustomUser
     template_name = 'profile_update.html'
     fields = ['account_name', 'account_color', 'account_picture']
-    success_url = '/home/'
+    success_url = '/'
 
 def home(request):
     context = {}
@@ -142,8 +142,6 @@ class ChannelDelete(DeleteView):
     model = Channel
     template_name = 'channel_delete.html'
     success_url = '/channel_search/'
-
-
 
 class MovieSearch(ListView):
     model = Movie
@@ -244,8 +242,6 @@ def show_detail(request, pk):
         else:
             print 'form not valid'
     return render_to_response('show_detail.html', context, context_instance=RequestContext(request))
-
-
 
 
 class ShowCreate(CreateView):
