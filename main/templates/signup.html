@@ -9,10 +9,11 @@
 <div style='text-align:center'>
     {% if request.user.is_anonymous %}
         <!--Regular signup form-->
+        <h1 style='text-align:center'>Signup</h1>
         <form action="/signup/" method="POST">
         {% csrf_token %}
         {{ form.as_p }}      
-        <input type="submit" value="Sign Up!"></br></br>
+        <input class="btn btn-sm btn-primary" type="submit" value="Sign Up!"></br></br>
         {{ valid }}
     </form>
     {% else %}
@@ -21,8 +22,8 @@
         
         <div style='text-align:center'>
             <h2>Logged in as {{request.user}}</h2></br>
-            <a href='/profile/{{request.user.pk}}'>Profile</a> |
-            <a href="/logout/">Logout</a>
+            <h3><a href='/profile/{{request.user.pk}}'>Profile</a> |
+            <a href="/logout/">Logout</a></h3>
         </div>
 
     {% endif %}

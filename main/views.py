@@ -35,7 +35,7 @@ def signup(request):
                                 
                 auth_user = authenticate(email=email, password=password)
                 login(request, auth_user)
-                return HttpResponseRedirect('/please_login/')
+                return HttpResponseRedirect('/')
 
             except IntegrityError, e:
                 context['valid'] = "A User With That Name Already Exists"

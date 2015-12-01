@@ -17,11 +17,12 @@
 
                 {% if request.user.is_anonymous %}
                     <!--Regular login form-->
+                    <h1 style='text-align:center'>Login</h1>
                     <form method='POST' action="/login/">
                     {%csrf_token%}
                         {{form.as_p}}
 
-                        <input type='submit' value='login' />
+                        <input class="btn btn-sm btn-primary" type='submit' value='Login' />
                         <input type="hidden" name="next" value="{{ next }}" />
                     </form>
 
@@ -31,8 +32,8 @@
                     
                     <div style='text-align:center'>
                         <h2>Logged in as {{request.user}}</h2></br>
-                        <a href='/profile/{{request.user.pk}}'>Profile</a>
-                        <a href="/logout/">Logout</a>
+                        <h3><a href='/profile/{{request.user.pk}}'>Profile</a> |
+                        <a href="/logout/">Logout</a></h3>
                     </div>
 
                 {% endif %}
