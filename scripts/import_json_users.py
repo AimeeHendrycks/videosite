@@ -14,10 +14,10 @@ with open('user_json.txt') as data_file:
 
 # print data
 for color in data:
-    new_color, created = Color.objects.get_or_create(hex_value=color['hex_value'])
+    new_color, created = Color.objects.get_or_create(title=color['title'])
     print new_color.hex_value
     
-    new_color.title = color['title']
+    new_color.hex_value = color['hex_value']
     
     new_color.save()
 
