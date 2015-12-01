@@ -89,7 +89,7 @@ for reply in data:
         new_reply.original_response = Response.objects.get(date=reply['original_response'])
         print new_reply.original_response
         new_reply.copy, created = Comment.objects.get_or_create(date=reply['date_created'])
-        print new_reply.copy.text
+        print new_reply.copy
         new_reply.user = CustomUser.objects.get(email=reply['user'])
         print new_reply.user
         if reply['reply_type'] == 'movie':
