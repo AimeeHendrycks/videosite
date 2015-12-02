@@ -68,7 +68,7 @@ class Episode(models.Model):
         verbose_name_plural = "Episodes"
         ordering = ['season_number', 'episode_number']
 
-    title = models.CharField(max_length = 255, null=True, blank=True, db_index=True)
+    title = models.CharField(max_length = 255, null=True, blank=True)
     episode_id = models.IntegerField(null=True, blank=True)
     imdb_id = models.CharField(max_length = 255, null=True, blank=True)
     season_number = models.IntegerField(null=True, blank=True)
@@ -77,8 +77,8 @@ class Episode(models.Model):
     first_aired = models.CharField(max_length = 255, null=True, blank=True)
     overview = models.TextField(null=True, blank=True)
     artwork = models.CharField(max_length = 255, null=True, blank=True)
-    upvote_count = models.IntegerField(default=0)
-    downvote_count = models.IntegerField(default=0)
+    upvote_count = models.IntegerField(default=0, null=True)
+    downvote_count = models.IntegerField(default=0, null=True)
 
     def __unicode__(self):
         return self.title
@@ -210,7 +210,6 @@ class Comment(models.Model):
     show = models.ForeignKey(Show, null=True, blank=True)
     episode = models.ForeignKey(Episode, null=True, blank=True)
     channel = models.ForeignKey(Channel, null=True, blank=True)
-    date = models.CharField(max_length=500, null=True, blank=True)
     def __unicode__(self):
         return self.text
 
@@ -224,7 +223,6 @@ class Response(models.Model):
     show = models.ForeignKey(Show, null=True, blank=True)
     episode = models.ForeignKey(Episode, null=True, blank=True)
     channel = models.ForeignKey(Channel, null=True, blank=True)
-    date = models.CharField(max_length=500, null=True, blank=True)
     def __unicode__(self):
         return self.text
 
@@ -238,7 +236,6 @@ class Reply(models.Model):
     show = models.ForeignKey(Show, null=True, blank=True)
     episode = models.ForeignKey(Episode, null=True, blank=True)
     channel = models.ForeignKey(Channel, null=True, blank=True)
-    date = models.CharField(max_length=500, null=True, blank=True)
     def __unicode__(self):
         return self.text
 
