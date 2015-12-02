@@ -15,18 +15,19 @@ inc = 0
 # print data
 for videosource in data:
     inc += 1
-    print inc
+    if inc >= 88190:
+        print inc
 
-    new_videosource, created = VideoSource.objects.get_or_create(source_link=videosource['source_link'])
-    print new_videosource.source_link
-    if videosource['display_name'] != None:
-        new_videosource.display_name = str(unidecode(videosource['display_name']))
-        print new_videosource.display_name
-    if videosource['video_type'] == 'show':
-        new_videosource.show = Show.objects.get(pk=videosource['show'])
-    if videosource['video_type'] == 'movie':
-        new_videosource.movie = Movie.objects.get(pk=videosource['movie'])
-   
-    new_videosource.save()
-    
-    print '<<' + str(new_videosource.pk) +'>>'
+        new_videosource, created = VideoSource.objects.get_or_create(source_link=videosource['source_link'])
+        print new_videosource.source_link
+        if videosource['display_name'] != None:
+            new_videosource.display_name = str(unidecode(videosource['display_name']))
+            print new_videosource.display_name
+        if videosource['video_type'] == 'show':
+            new_videosource.show = Show.objects.get(pk=videosource['show'])
+        if videosource['video_type'] == 'movie':
+            new_videosource.movie = Movie.objects.get(pk=videosource['movie'])
+       
+        new_videosource.save()
+        
+        print '<<' + str(new_videosource.pk) +'>>'
