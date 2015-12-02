@@ -35,7 +35,7 @@ for comment in data:
     if comment['comment_type'] == 'channel':
         new_comment.channel = Channel.objects.get(pk=comment['channel'])
         print new_comment.channel
-    # new_comment.save()
+    new_comment.save()
 
     print '<<' + str(new_comment.pk) +'>>'
     print '.............'
@@ -69,7 +69,7 @@ for response in data:
     if response['response_type'] == 'channel':
         new_response.channel = Channel.objects.get(pk=response['channel'])
         print new_response.channel
-    # new_response.save()
+    new_response.save()
 
     print '<<' + str(new_response.pk) +'>>'
     print '.............'
@@ -104,7 +104,7 @@ for reply in data:
     if reply['reply_type'] == 'channel':
         new_reply.channel = Channel.objects.get(pk=reply['channel'])
         print new_reply.channel
-    # new_reply.save()
+    new_reply.save()
 
     print '<<' + str(new_reply.pk) +'>>'
     print '.............'
