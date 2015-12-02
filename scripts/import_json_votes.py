@@ -21,15 +21,15 @@ for vote in data:
     new_vote.vote_type = str(unidecode(vote['vote_type']))
     new_vote.user = CustomUser.objects.get(email=vote['user'])
 
-    if vote['video_kind'] == 'show':
+    if vote['vote_kind'] == 'show':
         new_vote.show = Show.objects.get(pk=vote['show'])
-    if vote['video_kind'] == 'movie':
+    if vote['vote_kind'] == 'movie':
         new_vote.movie = Movie.objects.get(pk=vote['movie'])
-    if vote['video_kind'] == 'episode':
+    if vote['vote_kind'] == 'episode':
         new_vote.episode = Episode.objects.get(pk=vote['episode'])
-    if vote['video_kind'] == 'channel':
+    if vote['vote_kind'] == 'channel':
         new_vote.channel = Channel.objects.get(pk=vote['channel'])
    
-    new_videosource.save()
+    new_vote.save()
     
-    print '<<' + str(new_videosource.pk) +'>>'
+    print '<<' + str(new_vote.pk) +'>>'
