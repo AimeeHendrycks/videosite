@@ -9,7 +9,7 @@ django.setup()
 from django.conf import settings
 from main.models import Vote, Movie, Show, Channel, Episode
 
-with open('videosource_json.txt') as data_file:
+with open('vote_json.txt') as data_file:
     data = json.load(data_file)
 inc = 0
 # print data
