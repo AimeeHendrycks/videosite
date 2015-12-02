@@ -7,7 +7,7 @@ from unidecode import unidecode
 import django
 django.setup()
 from django.conf import settings
-from main.models import Vote, Movie, Show, Channel, Episode
+from main.models import Vote, Movie, Show, Channel, Episode, CustomUser
 
 with open('vote_json.txt') as data_file:
     data = json.load(data_file)
@@ -19,8 +19,7 @@ for vote in data:
 
     new_vote, created = Vote.objects.get_or_create(vote_id=vote['vote_id'])
     new_vote.vote_type = str(unidecode(vote['vote_type']))
-    if vote['display_name'] != None:
-        new_vote.display_name = str(unidecode(vote['display_name']))
+        new_vote.user = CustomUser.objects.get(email=vote['user'])
         print new_vote.display_name
     if vote['video_kind'] == 'show':
         new_vote.show = Show.objects.get(pk=vote['show'])
