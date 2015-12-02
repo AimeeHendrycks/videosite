@@ -17,7 +17,7 @@ for vote in data:
     inc += 1
     print inc
 
-    new_vote, created = Vote.objects.get_or_create(vote_id=int(vote['vote_id']))
+    new_vote, created = Vote.objects.get_or_create(vote_id=vote['vote_id'])
     new_vote.vote_type = str(unidecode(vote['vote_type']))
     if vote['display_name'] != None:
         new_vote.display_name = str(unidecode(vote['display_name']))
