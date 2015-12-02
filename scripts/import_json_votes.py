@@ -19,8 +19,8 @@ for vote in data:
 
     new_vote, created = Vote.objects.get_or_create(vote_id=vote['vote_id'])
     new_vote.vote_type = str(unidecode(vote['vote_type']))
-        new_vote.user = CustomUser.objects.get(email=vote['user'])
-        print new_vote.display_name
+    new_vote.user = CustomUser.objects.get(email=vote['user'])
+
     if vote['video_kind'] == 'show':
         new_vote.show = Show.objects.get(pk=vote['show'])
     if vote['video_kind'] == 'movie':
